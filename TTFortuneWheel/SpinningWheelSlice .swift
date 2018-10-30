@@ -49,15 +49,15 @@ extension FortuneWheelSliceProtocol {
     
     public var fontSize:CGFloat { return 18.0 }
     public var fontColor:UIColor { return UIColor.black }
-    public var font:UIFont { return UIFont.systemFont(ofSize: fontSize, weight: .regular) }
+    public var font:UIFont { return UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightRegular) }
     
     public var textAttributes:[NSAttributedString.Key:Any] {
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let deafultAttributes:[NSAttributedString.Key: Any] =
-                [.font: self.font,
-                 .foregroundColor: self.fontColor,
-                 .paragraphStyle: textStyle ]
+            [kCTFontAttributeName: self.font,
+                 kCTForegroundColorAttributeName: self.fontColor,
+                 kCTParagraphStyleAttributeName: textStyle ]
         return deafultAttributes
     }
     

@@ -24,7 +24,8 @@ open class FortuneWheelLayer: CALayer  {
     public init(frame:CGRect, parent:TTFortuneWheel,initialOffset:CGFloat = 0.0) {
         super.init()
         mainFrame = CGRect(origin: CGPoint(x: abs(layerInsets.left), y: abs(layerInsets.top)), size: frame.size)
-        self.frame = frame.inset(by: layerInsets)
+       // self.frame = frame.inset(by: layerInsets)
+        self.frame = frame.insetBy(dx: -50, dy: -50)
         self.parent = parent
         self.initialOffset = initialOffset
         self.backgroundColor = UIColor.clear.cgColor
@@ -34,7 +35,7 @@ open class FortuneWheelLayer: CALayer  {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+   
     open override func draw(in ctx: CGContext) {
         super.draw(in: ctx)
         
@@ -140,12 +141,12 @@ open class FortuneWheelLayer: CALayer  {
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         var textFontAttributes = slice.textAttributes
-        textFontAttributes[.paragraphStyle] = textStyle
+        textFontAttributes[kCTParagraphStyleAttributeName] = textStyle
         
-        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes as [String : Any], context: nil).height
         context.saveGState()
         context.clip(to: textRect)
-        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes as [String : Any])
         context.restoreGState()
 
         context.restoreGState()

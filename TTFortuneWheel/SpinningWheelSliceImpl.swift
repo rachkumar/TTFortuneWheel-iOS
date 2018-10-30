@@ -34,8 +34,8 @@ public class FortuneWheelSlice: FortuneWheelSliceProtocol {
         }
     }
         
-    public var font: UIFont {
-        return UIFont.systemFont(ofSize: fontSize, weight: .bold)
+    public var font:UIFont {
+        return UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightRegular)
     }
     
     public var style:Style = .dark
